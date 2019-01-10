@@ -34,6 +34,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     private NavigationView nv;
 
     private FirebaseAuth mAuth;
+    String id_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,9 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         ActionBar actionbar = getSupportActionBar();
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         actionbar.setDisplayHomeAsUpEnabled(true);
+
+        Intent i = getIntent();
+        id_profile = i.getStringExtra("ID");
 
 
 
@@ -94,8 +98,11 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
-                    case R.id.nav_item_one:
-                        Toast.makeText(HomePage.this,"HII",Toast.LENGTH_LONG).show();
+                    case R.id.group_msg:
+                        Intent intent = new Intent(HomePage.this,Group_messege.class);
+                        intent.putExtra("ID",id_profile);
+                        startActivity(intent);
+
                         break;
                 }
                 return false;

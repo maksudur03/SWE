@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="8dp"
+
+    android:layout_height="wrap_content">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="nayeem"
+    android:id="@+id/name_left"
+
+    android:layout_marginLeft="20dp"
+    />
+
+
+    <TextView
+        android:id="@+id/leftText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:text="Hello this is me!!"
+        android:padding="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#212121"
+        android:background="@drawable/left_background"
+        android:elevation="2dp"
+        />
+
+
+    <TextView
+        android:id="@+id/rightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Hi!! How are you!!"
+        android:background="@drawable/right_background"
+        android:textColor="#fff"
+        android:padding="8dp"
+        android:elevation="2dp"/>
+
+
+</RelativeLayout>
