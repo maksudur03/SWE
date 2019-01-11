@@ -13,7 +13,7 @@ public class group_messege_adapter extends RecyclerView.Adapter<group_messege_ad
 
 
     private List<ChatMessage> msg_list;
-    String id;
+    String id = "";
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView rightText,leftText,name;
@@ -44,9 +44,7 @@ public class group_messege_adapter extends RecyclerView.Adapter<group_messege_ad
     @Override
     public void onBindViewHolder(@NonNull group_messege_adapter.MyViewHolder holder, int i) {
         ChatMessage model = msg_list.get(i);
-        if (model.getMsgUser().equals(id)) {
-
-
+        if (model.getMsgUser().equals(Group_messege.user_name)) {
                     holder.rightText.setText(model.getMsgText());
                     holder.name.setVisibility(View.GONE);
                     holder.rightText.setVisibility(View.VISIBLE);

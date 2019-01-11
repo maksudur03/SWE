@@ -42,7 +42,7 @@ public class class_schedule_adapter extends RecyclerView.Adapter<class_schedule_
     @Override
     public void onBindViewHolder(@NonNull class_schedule_adapter.MyViewHolder myViewHolder, int i) {
         if(i == 0){
-                myViewHolder.title.setText("Today Tuesday");
+                myViewHolder.title.setText(ClassSchedule.DAY);
                 myViewHolder.title.setVisibility(View.VISIBLE);
                 myViewHolder.subject.setVisibility(View.GONE);
                 myViewHolder.time.setVisibility(View.GONE);

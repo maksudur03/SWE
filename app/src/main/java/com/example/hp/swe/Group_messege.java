@@ -2,6 +2,7 @@ package com.example.hp.swe;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,21 +41,25 @@ public class Group_messege extends AppCompatActivity {
     DatabaseReference ref;
     private List<ChatMessage> msgList = new ArrayList<>();
     private group_messege_adapter mAdapter;
+    public static String user_name;
+
+    SharedPreferences sp;
 
     String id,batch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_messege);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        sp = getSharedPreferences("login",MODE_PRIVATE);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         editText = (EditText) findViewById(R.id.editText);
         addBtn =  findViewById(R.id.addBtn);
 
-        Intent i = getIntent();
-        id = i.getStringExtra("ID");
+        id = sp.getString("registration_number","");
         batch = id.substring(0,4);
+
 
 
 
@@ -61,15 +67,28 @@ public class Group_messege extends AppCompatActivity {
         ref.keepSynced(true);
 
 
+        ref.child("Profile").child(batch).child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user_name = dataSnapshot.child("name").getValue().toString().trim();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(Group_messege.this,user_name,Toast.LENGTH_LONG).show();
                 String message = editText.getText().toString().trim();
 
                 if (!message.equals("")) {
 
-                    ChatMessage chatMessage = new ChatMessage(message,id);
+                    ChatMessage chatMessage = new ChatMessage(message,user_name);
                     ref.child("chat").child(batch).push().setValue(chatMessage);
                 }
                 editText.setText("");
@@ -77,11 +96,9 @@ public class Group_messege extends AppCompatActivity {
         });
 
 
-        msgList.add(new ChatMessage("kutta","user"));
-        msgList.add(new ChatMessage("kutta","user"));
-        msgList.add(new ChatMessage("kutta","user"));
 
-        mAdapter = new group_messege_adapter(msgList,id);
+
+        mAdapter = new group_messege_adapter(msgList,user_name);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -130,4 +147,6 @@ public class Group_messege extends AppCompatActivity {
 
 
     }
+
+
 }

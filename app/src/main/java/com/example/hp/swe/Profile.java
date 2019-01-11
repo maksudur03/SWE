@@ -1,9 +1,9 @@
 package com.example.hp.swe;
 
 public class Profile {
-    String name,registration_number,blood_group,dob,phone_number,emergency_number,email,role;
+    String name,registration_number,blood_group,dob,phone_number,emergency_number,email,role,image;
 
-    public Profile(String name,String registration_number,String blood_group,String dob,String phone_number,String emergency_number, String email, String role){
+    public Profile(String name,String registration_number,String blood_group,String dob,String phone_number,String emergency_number, String email, String role,String image){
         this.name = name;
         this.registration_number = registration_number;
         this.blood_group = blood_group;
@@ -12,6 +12,7 @@ public class Profile {
         this.emergency_number = emergency_number;
         this.email = email;
         this.role = role;
+        this.image = image;
     }
 
     public Profile(){
@@ -83,4 +84,13 @@ public class Profile {
     public String getRole() {
         return role;
     }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
 }

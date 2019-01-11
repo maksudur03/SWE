@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +26,18 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragmentInteractionListener,ExamSchedule.OnFragmentInteractionListener {
 
@@ -33,8 +46,9 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     private ActionBarDrawerToggle t;
     private NavigationView nv;
 
+
     private FirebaseAuth mAuth;
-    String id_profile;
+    public static String id_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +116,25 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         Intent intent = new Intent(HomePage.this,Group_messege.class);
                         intent.putExtra("ID",id_profile);
                         startActivity(intent);
-
                         break;
+
+
+
+
                 }
                 return false;
             }
         });
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Calendar c = Calendar.getInstance();
+        Date date = new Date();
+        c.setTime(date);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        String weekdays[] = new DateFormatSymbols(Locale.ENGLISH).getWeekdays();
+        String day = weekdays[dayOfWeek];
 
 
 

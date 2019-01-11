@@ -63,8 +63,11 @@ public class Login extends AppCompatActivity {
                                     Intent i = new Intent(Login.this,HomePage.class);
                                     i.putExtra("ID",s_registration_number);
                                     sp.edit().putBoolean("logged",false).apply();
-                                    startActivity(i);
+                                    sp.edit().putString("registration_number",s_registration_number).apply();
+                                    sp.edit().putString("password",s_password).apply();
+
                                     Dialog.dismiss();
+                                    startActivity(i);
                                     finish();
 
 
