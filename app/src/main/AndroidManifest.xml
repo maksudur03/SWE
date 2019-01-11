@@ -11,10 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme.Light">
-
-
-        </activity>
+            android:theme="@style/AppTheme.Light"></activity>
         <activity android:name=".Register_Basic" />
         <activity android:name=".Registration_Profile" />
         <activity android:name=".SplasScreen" />
@@ -25,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Group_messege"
-            android:parentActivityName=".HomePage">
-        </activity>
+        <activity
+            android:name=".Group_messege"
+            android:parentActivityName=".HomePage"></activity>
+        <activity android:name=".Batch_16"></activity>
     </application>
 
 </manifest>
