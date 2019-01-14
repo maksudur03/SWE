@@ -1,6 +1,7 @@
 package com.example.hp.swe;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class class_schedule_adapter extends RecyclerView.Adapter<class_schedule_adapter.MyViewHolder> {
     private List<Class_Schedule_object> class_list;
-
+    String s;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, time, subject;
 
@@ -28,6 +29,10 @@ public class class_schedule_adapter extends RecyclerView.Adapter<class_schedule_
     public class_schedule_adapter(List<Class_Schedule_object> class_list) {
         this.class_list = class_list;
     }
+    public class_schedule_adapter(List<Class_Schedule_object> class_list,String s) {
+        this.class_list = class_list;
+        this.s = s;
+    }
 
 
 
@@ -41,20 +46,29 @@ public class class_schedule_adapter extends RecyclerView.Adapter<class_schedule_
 
     @Override
     public void onBindViewHolder(@NonNull class_schedule_adapter.MyViewHolder myViewHolder, int i) {
-        if(i == 0){
-                myViewHolder.title.setText(ClassSchedule.DAY);
-                myViewHolder.title.setVisibility(View.VISIBLE);
-                myViewHolder.subject.setVisibility(View.GONE);
-                myViewHolder.time.setVisibility(View.GONE);
-        }
-        else {
+        if(s != null){
             Class_Schedule_object class_schedule_object = class_list.get(i);
             myViewHolder.time.setText(class_schedule_object.getTime());
             myViewHolder.subject.setText(class_schedule_object.getSubject());
             myViewHolder.title.setVisibility(View.GONE);
             myViewHolder.subject.setVisibility(View.VISIBLE);
             myViewHolder.time.setVisibility(View.VISIBLE);
+        }
+        else {
+            if (i == 0) {
+                myViewHolder.title.setText(ClassSchedule.DAY);
+                myViewHolder.title.setVisibility(View.VISIBLE);
+                myViewHolder.subject.setVisibility(View.GONE);
+                myViewHolder.time.setVisibility(View.GONE);
+            } else {
+                Class_Schedule_object class_schedule_object = class_list.get(i);
+                myViewHolder.time.setText(class_schedule_object.getTime());
+                myViewHolder.subject.setText(class_schedule_object.getSubject());
+                myViewHolder.title.setVisibility(View.GONE);
+                myViewHolder.subject.setVisibility(View.VISIBLE);
+                myViewHolder.time.setVisibility(View.VISIBLE);
 
+            }
         }
     }
 

@@ -11,21 +11,27 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme.Light"></activity>
+            android:theme="@style/AppTheme.Light" />
         <activity android:name=".Register_Basic" />
         <activity android:name=".Registration_Profile" />
-        <activity android:name=".SplasScreen" />
-        <activity android:name=".Login">
+        <activity
+            android:name=".SplasScreen"
+            android:theme="@style/AppTheme.Light"></activity>
+        <activity android:name=".Login" />
+        <activity
+            android:name=".Group_messege"
+            android:parentActivityName=".HomePage" />
+        <activity android:name=".Batch_16" />
+        <activity android:name=".CR_class_schedule">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Group_messege"
-            android:parentActivityName=".HomePage"></activity>
-        <activity android:name=".Batch_16"></activity>
+        <activity android:name=".Pop_up_class_adder"
+            android:label="Select Schedule"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
 </manifest>

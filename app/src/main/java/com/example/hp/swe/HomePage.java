@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -49,6 +51,11 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
     private FirebaseAuth mAuth;
     public static String id_profile;
+    TextView nav_user;
+    public static String user_name = "hh";
+    String id,batch;
+    SharedPreferences sp;
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +73,56 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        Intent i = getIntent();
-        id_profile = i.getStringExtra("ID");
+        nv = findViewById(R.id.nav_view);
+        nv = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  nv.getHeaderView(0);
+         nav_user = (TextView)hView.findViewById(R.id.nav_header_textView);
 
+        Intent i = getIntent();
+
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        id_profile = sp.getString("registration_number","");
+
+//        ///////////////////////////////////////////////////////////////////////////////////////
+        batch = id_profile.substring(0,4);
+
+        ref = FirebaseDatabase.getInstance().getReference();
+        ref.keepSynced(true);
+        final ProgressDialog Dialog = new ProgressDialog(HomePage.this);
+        Dialog.setMessage("Please Wait.....");
+        Dialog.show();
+
+        ref.child("Profile").child(batch).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Profile p = dataSnapshot.getValue(Profile.class);
+                if(p.getRegistration_number().equals(id_profile)){
+                    SetName(p.getName());
+                    Dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -105,8 +159,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         /////////////////////////////////////////////////////////////////////////////////
 
 
-        nv = findViewById(R.id.nav_view);
-        nv = (NavigationView) findViewById(R.id.nav_view);
+
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -173,6 +226,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                                 editor.clear();
                                 editor.commit();
                                 startActivity(new Intent(HomePage.this,Login.class));
+                                finish();
 
 
                             }
@@ -188,5 +242,21 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+    private static long back_pressed;
+    @Override
+    public void onBackPressed(){
+        if (back_pressed + 2000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            System.exit(0);
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Press once again to exit", Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
+        }
+    }
+    void SetName(String s){
+
+        nav_user.setText(s);
     }
 }

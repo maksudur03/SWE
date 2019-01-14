@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
-
+//        Toast.makeText(Login.this,sp.getString("registration_number",""),Toast.LENGTH_LONG).show();
 
 
 
@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
 
                                 } else {
                                     Toast.makeText(Login.this,"Registration and password is incorrect",Toast.LENGTH_LONG).show();
+                                    Dialog.dismiss();
                                 }
                             }
                         });
@@ -96,5 +97,16 @@ public class Login extends AppCompatActivity {
 
 
 
+    }
+    private static long back_pressed;
+    @Override
+    public void onBackPressed(){
+        if (back_pressed + 2000 > System.currentTimeMillis()){
+            super.onBackPressed();
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Press once again to exit", Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hp.swe;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -39,6 +42,7 @@ public class Group_messege extends AppCompatActivity {
     EditText editText;
     ImageView addBtn;
     DatabaseReference ref;
+
     private List<ChatMessage> msgList = new ArrayList<>();
     private group_messege_adapter mAdapter;
     public static String user_name;
@@ -83,9 +87,9 @@ public class Group_messege extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Group_messege.this,user_name,Toast.LENGTH_LONG).show();
+//                Toast.makeText(Group_messege.this,user_name,Toast.LENGTH_LONG).show();
                 String message = editText.getText().toString().trim();
-
+                hideKeyboardwithoutPopulate(Group_messege.this);
                 if (!message.equals("")) {
 
                     ChatMessage chatMessage = new ChatMessage(message,user_name);
@@ -146,6 +150,13 @@ public class Group_messege extends AppCompatActivity {
 
 
 
+    }
+    public static void hideKeyboardwithoutPopulate(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
 
 
