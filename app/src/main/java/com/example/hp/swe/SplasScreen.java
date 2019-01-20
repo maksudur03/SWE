@@ -15,11 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SplasScreen extends AppCompatActivity {
 
     SharedPreferences sp;
-    String id,pass;
+    String id,pass,refreshedToken;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class SplasScreen extends AppCompatActivity {
                     ////////////////Not Logged in/////////////////////
                     startActivity(new Intent(SplasScreen.this,Login.class));
                     finish();
+//                    refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//                    Toast.makeText(SplasScreen.this,refreshedToken,Toast.LENGTH_LONG).show();
+
 
                 }
                 else{

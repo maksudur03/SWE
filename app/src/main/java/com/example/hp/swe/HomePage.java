@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -66,6 +68,14 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        String token_id = "hh";
+        token_id= FirebaseInstanceId.getInstance().getToken();
+
+
+
+
+
+
         dl = (DrawerLayout)findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,6 +98,12 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
         ref = FirebaseDatabase.getInstance().getReference();
         ref.keepSynced(true);
+
+        DatabaseReference reff;
+        reff = FirebaseDatabase.getInstance().getReference();
+        reff.child("fcm-token").child(batch).child(token_id).child("token").setValue(token_id);
+
+
         final ProgressDialog Dialog = new ProgressDialog(HomePage.this);
         Dialog.setMessage("Please Wait.....");
         Dialog.show();
@@ -97,7 +113,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Profile p = dataSnapshot.getValue(Profile.class);
                 if(p.getRegistration_number().equals(id_profile)){
-                    SetName(p.getName());
+                    SetName(p.getName(),p.getImage());
                     Dialog.dismiss();
                 }
             }
@@ -171,7 +187,15 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         startActivity(intent);
                         break;
 
-
+                    case R.id.cr_panel:
+                        Intent intent1 = new Intent(HomePage.this,C_R_Panel.class);
+                        intent1.putExtra("ID",id_profile);
+                        startActivity(intent1);
+                        break;
+                    case R.id.notice:
+                        Intent intent2 = new Intent(HomePage.this,Notice_activity.class);
+                        startActivity(intent2);
+                        break;
 
 
                 }
@@ -190,6 +214,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         String day = weekdays[dayOfWeek];
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -255,8 +280,12 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
             back_pressed = System.currentTimeMillis();
         }
     }
-    void SetName(String s){
+    void SetName(String s,String img){
 
         nav_user.setText(s);
+        user_name = s;
+        sp.edit().putString("profile_pic",img).apply();
+        sp.edit().putString("user_name",user_name);
+
     }
 }

@@ -14,5 +14,15 @@
     <color name="aluminum">#999999</color>
     <color name="base">#AAAAAA</color>
     <color name="iron">#CCCCCC</color>
+    <color name="reg_no">#2F7092</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="batch">#2F7092</color>
+    <color name="department">#0D5D98</color>
+    <color name="grey">#E5E5E5</color>
+
 
 </resources>

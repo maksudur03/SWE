@@ -71,6 +71,10 @@ public class Register_Basic extends AppCompatActivity {
             }
         });
 
+        Intent ii = getIntent();
+        Toast.makeText(Register_Basic.this,ii.getStringExtra("Position"),Toast.LENGTH_LONG).show();
+
+
 
 
     }

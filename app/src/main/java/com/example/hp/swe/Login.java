@@ -17,15 +17,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Login extends AppCompatActivity {
 
     EditText registration_number,password;
     Button login,signup;
     private FirebaseAuth mAuth;
-    String s_registration_number,s_password;
+    String s_registration_number,s_password,refreshedToken;
     SharedPreferences sp;
-
+    String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 s_registration_number = registration_number.getText().toString();
                 s_password = password.getText().toString();
-
+//                refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//                Toast.makeText(Login.this,refreshedToken,Toast.LENGTH_LONG).show();
                 final ProgressDialog Dialog = new ProgressDialog(Login.this);
                 Dialog.setMessage("Please Wait.....");
                 Dialog.show();
@@ -65,7 +68,7 @@ public class Login extends AppCompatActivity {
                                     sp.edit().putBoolean("logged",false).apply();
                                     sp.edit().putString("registration_number",s_registration_number).apply();
                                     sp.edit().putString("password",s_password).apply();
-
+//                                    String token_id= FirebaseInstanceId.getInstance().getToken();
                                     Dialog.dismiss();
                                     startActivity(i);
                                     finish();
@@ -78,7 +81,8 @@ public class Login extends AppCompatActivity {
                             }
                         });
 
-
+//                String token_id= FirebaseInstanceId.getInstance().getToken();
+//                Toast.makeText(Login.this,token_id,Toast.LENGTH_LONG).show();
 
             }
         });
