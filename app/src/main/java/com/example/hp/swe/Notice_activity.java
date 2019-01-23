@@ -1,15 +1,24 @@
 package com.example.hp.swe;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +40,7 @@ public class Notice_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.notice_recycler);
 
@@ -80,9 +90,29 @@ public class Notice_activity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(Notice_activity.this,
                 DividerItemDecoration.VERTICAL));
 
-
-
-
-
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.add_notice, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch(itemId) {
+            // Android home
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_add_notice:
+                //Toast.makeText(HomePage.this,"HII",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(Notice_activity.this,Notice_pop_up.class));
+                return true;
+        }
+        return true;
+    }
+
 }

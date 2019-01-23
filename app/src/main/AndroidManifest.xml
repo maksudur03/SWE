@@ -26,7 +26,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Login" />
         <activity
@@ -41,8 +40,10 @@
         <activity
             android:name=".Notice_pop_up"
             android:label="Post Notice"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
-        <activity android:name=".Notice_activity"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".Notice_activity"
+            android:parentActivityName=".HomePage"
+            />
     </application>
 
 </manifest>

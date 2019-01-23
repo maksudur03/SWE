@@ -2,8 +2,11 @@ package com.example.hp.swe;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,7 +16,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,7 +47,10 @@ public class ExamSchedule extends Fragment {
     private List<Exam_Schedule_object> examList = new ArrayList<>();
     RecyclerView recyclerView;
     private Exam_Schedule_adapter mAdapter;
-
+    SharedPreferences sp;
+    String id,batch;
+    Date date = null,c;
+    SimpleDateFormat df;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -90,61 +106,67 @@ public class ExamSchedule extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
 
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
-        examList.add(new Exam_Schedule_object("12/12/2018","10:30pm","Bus 350"));
+
+        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        Dialog.setMessage("Please Wait.....");
+        Dialog.show();
+//        sp = getSharedPreferences("login",MODE_PRIVATE);
+
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        id = preferences.getString("registration_number","");
+        batch = id.substring(0,4);
+        c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+         df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+        String test = "01-Feb-2019";
+
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child("Exam").child(batch).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Exam_Schedule_object p = dataSnapshot.getValue(Exam_Schedule_object.class);
+                try {
+                    date = df.parse(p.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if(c.compareTo(date)<=0){
+                    examList.add(new Exam_Schedule_object(p.getDate(),"10:30pm","Bus 350"));
+                }
+//                examList.add(dataSnapshot.getValue(Exam_Schedule_object.class));
+                mAdapter.notifyDataSetChanged();
+                Dialog.dismiss();
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
         return v;
 
     }
