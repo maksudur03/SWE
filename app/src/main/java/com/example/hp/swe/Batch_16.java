@@ -24,7 +24,7 @@ public class Batch_16 extends AppCompatActivity {
 
     RecyclerView class_schedulee;
     private batch_16_adapter mAdapter;
-    public  static  List<Profile>profile_16 = new ArrayList<>();
+    public  List<Profile>profile_16 = new ArrayList<>();
     SharedPreferences sp;
     String batch;
 
@@ -85,6 +85,9 @@ public class Batch_16 extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
 

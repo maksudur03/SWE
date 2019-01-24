@@ -31,7 +31,9 @@
         <activity
             android:name=".Group_messege"
             android:parentActivityName=".HomePage" />
-        <activity android:name=".Batch_16" />
+        <activity
+            android:name=".Batch_16"
+            android:parentActivityName=".HomePage" />
         <activity
             android:name=".Pop_up_class_adder"
             android:label="Select Schedule"

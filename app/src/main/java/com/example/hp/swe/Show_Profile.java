@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 public class Show_Profile extends AppCompatActivity {
     ImageView call;
     ImageView profile_image;
@@ -48,11 +50,14 @@ public class Show_Profile extends AppCompatActivity {
 
         });
 
-        Intent i = getIntent();
-        String s = i.getStringExtra("Position");
-        int pos = Integer.parseInt(s);
+//        Intent i = getIntent();
+//        String s = i.getStringExtra("Position");
+//        int pos = Integer.parseInt(s);
+        Gson gson = new Gson();
+        Profile p = gson.fromJson(getIntent().getStringExtra("myjson"), Profile.class);
 
-        Profile p = Batch_16.profile_16.get(pos);
+
+//        Profile p = Batch_16.profile_16.get(pos);
         name.setText(p.getName());
         reg_no.setText(p.getRegistration_number());
         email.setText(p.getEmail());

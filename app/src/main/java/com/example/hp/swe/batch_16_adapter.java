@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -19,6 +21,7 @@ public class batch_16_adapter extends RecyclerView.Adapter<batch_16_adapter.MyVi
 
     private List<Profile> class_list;
     Context cn;
+    String myjson;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView regestration,name;
@@ -31,8 +34,17 @@ public class batch_16_adapter extends RecyclerView.Adapter<batch_16_adapter.MyVi
                 @Override
                 public void onClick(View v) {
                     Intent myactivity = new Intent(cn.getApplicationContext(), Show_Profile.class);
+                    Gson gson = new Gson();
+
+
+
                     myactivity.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                    myactivity.putExtra("Position",""+getAdapterPosition());
+                    Profile p = class_list.get(getAdapterPosition());
+                    String myJson1 = gson.toJson(p);
+                    myjson = myJson1;
+
+                    myactivity.putExtra("myjson", myjson);
+                    //                    myactivity.putExtra("Position",p);
                     cn.getApplicationContext().startActivity(myactivity);                }
             });
         }

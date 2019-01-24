@@ -2,6 +2,7 @@ package com.example.hp.swe;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class Registration_Profile extends AppCompatActivity {
     String id,pass;
     ImageView profilepic;
     Button photobutton,register_profile_signup;
+    public static final int PICK_IMAGE = 1;
     EditText name,blood,dob,phone_number,email,emergency_number;
     String s_name,s_blood,s_dob,s_phone_number,s_email,s_emergency_number;
     private FirebaseAuth mAuth;
@@ -47,6 +49,26 @@ public class Registration_Profile extends AppCompatActivity {
         phone_number = findViewById(R.id.input_phone_number);
         email = findViewById(R.id.input_email);
         emergency_number = findViewById(R.id.input_emergency_number);
+
+
+
+
+        photobutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);//
+                Toast.makeText(Registration_Profile.this,"Feature Not added Sorry",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
+
 
 
         register_profile_signup.setOnClickListener(new View.OnClickListener() {
@@ -96,4 +118,16 @@ public class Registration_Profile extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == PICK_IMAGE) {
+            //TODO: action
+            Uri d = data.getData();
+
+
+        }
+    }
+
 }
+
