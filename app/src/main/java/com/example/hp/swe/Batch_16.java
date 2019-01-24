@@ -23,7 +23,7 @@ public class Batch_16 extends AppCompatActivity {
 
 
     RecyclerView class_schedulee;
-    private batch_16_adapter mAdapter;
+    private batch_adapter mAdapter;
     public  static  List<Profile>profile_16 = new ArrayList<>();
     SharedPreferences sp;
     String batch;
@@ -36,19 +36,12 @@ public class Batch_16 extends AppCompatActivity {
 
 
         class_schedulee = findViewById(R.id.batch_16_recycler);
-        mAdapter = new batch_16_adapter(profile_16,Batch_16.this);
+        mAdapter = new batch_adapter(profile_16,Batch_16.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Batch_16.this);
         class_schedulee.setLayoutManager(mLayoutManager);
         class_schedulee.setItemAnimator(new DefaultItemAnimator());
 //        classList.add(new Profile("Nayeem","2016831025","A+","sagags","afsa","affs","afssagasg","agsagsag","safsfa"));
         class_schedulee.setAdapter(mAdapter);
-
-
-
-
-
-
-
 
 
         final ProgressDialog Dialog = new ProgressDialog(Batch_16.this);
