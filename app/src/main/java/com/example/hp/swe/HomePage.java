@@ -57,6 +57,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     public static String user_name = "hh";
     String id,batch;
     SharedPreferences sp;
+    Profile p;
     DatabaseReference ref;
 
     @Override
@@ -111,7 +112,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         ref.child("Profile").child(batch).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Profile p = dataSnapshot.getValue(Profile.class);
+                 p = dataSnapshot.getValue(Profile.class);
                 if(p.getRegistration_number().equals(id_profile)){
                     SetName(p.getName(),p.getImage());
                     Dialog.dismiss();
@@ -188,13 +189,22 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         break;
 
                     case R.id.cr_panel:
-                        Intent intent1 = new Intent(HomePage.this,C_R_Panel.class);
-                        intent1.putExtra("ID",id_profile);
-                        startActivity(intent1);
+                        if(p.getRole().equals("CR")) {
+                            Intent intent1 = new Intent(HomePage.this, C_R_Panel.class);
+                            intent1.putExtra("ID", id_profile);
+                            startActivity(intent1);
+                        }
+                        else{
+                            Toast.makeText(HomePage.this,"Not Authorized. Contact admin plz",Toast.LENGTH_LONG).show();
+                        }
                         break;
                     case R.id.notice:
                         Intent intent2 = new Intent(HomePage.this,Notice_activity.class);
                         startActivity(intent2);
+                        break;
+
+                    case R.id.batch_2016:
+                        startActivity(new Intent(HomePage.this,Batch_16.class));
                         break;
 
 

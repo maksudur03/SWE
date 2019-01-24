@@ -42,7 +42,13 @@
             android:name=".Notice_pop_up"
             android:label="Post Notice"
             android:theme="@style/Theme.AppCompat.Dialog" />
+<<<<<<< HEAD
         <activity android:name=".Notice_activity" />
+=======
+        <activity android:name=".Notice_activity"
+            android:parentActivityName=".HomePage"
+            />
+>>>>>>> 4cf84b67e19446b9c058d880d822e70429b3f4d7
     </application>
 
 </manifest>

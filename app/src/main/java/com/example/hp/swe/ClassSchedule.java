@@ -178,7 +178,7 @@ public class ClassSchedule extends Fragment {
         };
 
         Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 5000);
+        pdCanceller.postDelayed(progressRunnable, 3000);
 
 
 
