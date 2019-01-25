@@ -31,11 +31,10 @@
         />
 
     <Button
+        android:id="@+id/photobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/photobutton"
-        />
+        android:text="Upload" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
