@@ -11,9 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme.Light" />
+            android:theme="@style/AppTheme.Light"
+            android:configChanges="keyboardHidden|orientation"
+            />
         <activity android:name=".Register_Basic" />
         <activity android:name=".Registration_Profile" />
         <activity android:name=".CR_class_schedule" />
@@ -33,6 +40,9 @@
             android:parentActivityName=".HomePage" />
         <activity
             android:name=".Batch_16"
+            android:parentActivityName=".HomePage" />
+        <activity
+            android:name=".Batch_17"
             android:parentActivityName=".HomePage" />
         <activity
             android:name=".Pop_up_class_adder"

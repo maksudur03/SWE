@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
-public class batch_16_adapter extends RecyclerView.Adapter<batch_16_adapter.MyViewHolder> {
+public class batch_adapter extends RecyclerView.Adapter<batch_adapter.MyViewHolder> {
 
     private List<Profile> class_list;
     Context cn;
@@ -50,7 +49,7 @@ public class batch_16_adapter extends RecyclerView.Adapter<batch_16_adapter.MyVi
         }
     }
 
-    public batch_16_adapter(List<Profile> class_list,Context cn) {
+    public batch_adapter(List<Profile> class_list, Context cn) {
         this.class_list = class_list;
         this.cn = cn;
     }
