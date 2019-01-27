@@ -1,5 +1,6 @@
 package com.example.hp.swe;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,6 +37,7 @@ public class Registration_Profile extends AppCompatActivity {
     String s_name,s_blood,s_dob,s_phone_number,s_email,s_emergency_number;
     private FirebaseAuth mAuth;
     private StorageReference nStorage;
+    Uri selectedImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,36 +92,50 @@ public class Registration_Profile extends AppCompatActivity {
                 s_emergency_number = emergency_number.getText().toString();
                 s_name = name.getText().toString();
                 s_phone_number = phone_number.getText().toString();
-                if(s_name.equals("") || s_blood.equals("") || s_dob.equals("") || s_phone_number.equals("") || s_email.equals("") || s_emergency_number.equals("")){
+                if(s_name.equals("") || s_blood.equals("") || s_dob.equals("") || s_phone_number.equals("") || s_email.equals("") || s_emergency_number.equals("") || Uri.EMPTY.equals(selectedImage)){
                     Toast.makeText(Registration_Profile.this,"Fill all Field",Toast.LENGTH_LONG).show();
                 }
                 else{
 
-                    final ProgressDialog Dialog = new ProgressDialog(Registration_Profile.this);
-                    Dialog.setMessage("Account is Creating.....");
-                    Dialog.show();
-
-                    mAuth.createUserWithEmailAndPassword(id + "@gmail.com", pass)
-                            .addOnCompleteListener(Registration_Profile.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Profile p = new Profile(s_name,id,s_blood,s_dob,s_phone_number,s_emergency_number,s_email,"student","null");
-                                        final DatabaseReference check = FirebaseDatabase.getInstance().getReference();
-                                        check.child("Profile").child(id.substring(0,4)).child(id).setValue(p);
-                                        Dialog.dismiss();
-                                        startActivity(new Intent(Registration_Profile.this,Login.class));
-
-                                    } else {
-                                        Toast.makeText(Registration_Profile.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
 
 
-                                    }       // ...
-                                    }
-                                });
 
+
+                    StorageReference filepath= nStorage.child("Photos").child(selectedImage.getLastPathSegment());
+    final ProgressDialog Dialog = new ProgressDialog(Registration_Profile.this);
+            Dialog.setMessage("Account is Creating.....");
+            Dialog.show();
+            filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        @Override
+        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            mAuth.createUserWithEmailAndPassword(id + "@gmail.com", pass)
+                    .addOnCompleteListener(Registration_Profile.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Profile p = new Profile(s_name,id,s_blood,s_dob,s_phone_number,s_emergency_number,s_email,"student","null");
+                                final DatabaseReference check = FirebaseDatabase.getInstance().getReference();
+                                check.child("Profile").child(id.substring(0,4)).child(id).setValue(p);
+                                Dialog.dismiss();
+                                startActivity(new Intent(Registration_Profile.this,Login.class));
+
+
+                            } else {
+                                Toast.makeText(Registration_Profile.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+
+
+                            }       // ...
+                        }
+                    });
+
+
+
+
+            Toast.makeText(Registration_Profile.this,"Upload done", Toast.LENGTH_LONG).show();
+        }
+    });
 
                 }
 
@@ -133,19 +149,14 @@ public class Registration_Profile extends AppCompatActivity {
     {
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == PICK_IMAGE && resultCode== RESULT_OK && data != null) {
-            Uri selectedImage= data.getData();
-            StorageReference filepath= nStorage.child("Photos").child(selectedImage.getLastPathSegment());
-            filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Registration_Profile.this,"Upload done", Toast.LENGTH_LONG).show();
-                }
-            });
+             selectedImage= data.getData();
+
             profilepic.setImageURI(selectedImage);
 
 
         }
     }
 
+//
 }
 
