@@ -3,6 +3,7 @@ package com.example.hp.swe;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,23 +15,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Registration_Profile extends AppCompatActivity {
-
 
     String id,pass;
     ImageView profilepic;
     Button photobutton,register_profile_signup;
-    public static final int PICK_IMAGE = 1;
+    public static final int PICK_IMAGE = 2;
     EditText name,blood,dob,phone_number,email,emergency_number;
     String s_name,s_blood,s_dob,s_phone_number,s_email,s_emergency_number;
     private FirebaseAuth mAuth;
+    private StorageReference nStorage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +45,10 @@ public class Registration_Profile extends AppCompatActivity {
         pass = i.getStringExtra("PASS");
         mAuth = FirebaseAuth.getInstance();
 
+        nStorage = FirebaseStorage.getInstance().getReference();
         profilepic = findViewById(R.id.profilepic);
         photobutton = findViewById(R.id.photobutton);
+
         register_profile_signup = findViewById(R.id.register_profile_signup);
         name = findViewById(R.id.input_name);
         blood = findViewById(R.id.input_blood);
@@ -57,13 +64,16 @@ public class Registration_Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);//
-                Toast.makeText(Registration_Profile.this,"Feature Not added Sorry",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+               intent.setType("image/*");
+                //intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, PICK_IMAGE);//
+                //Toast.makeText(Registration_Profile.this,"Feature Not added Sorry",Toast.LENGTH_LONG).show();
+
             }
         });
+
+
 
 
 
@@ -119,11 +129,19 @@ public class Registration_Profile extends AppCompatActivity {
 
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == PICK_IMAGE) {
-            //TODO: action
-            Uri d = data.getData();
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == PICK_IMAGE && resultCode== RESULT_OK && data != null) {
+            Uri selectedImage= data.getData();
+            StorageReference filepath= nStorage.child("Photos").child(selectedImage.getLastPathSegment());
+            filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(Registration_Profile.this,"Upload done", Toast.LENGTH_LONG).show();
+                }
+            });
+            profilepic.setImageURI(selectedImage);
 
 
         }
