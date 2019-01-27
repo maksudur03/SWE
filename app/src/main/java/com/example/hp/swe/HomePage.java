@@ -221,6 +221,10 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         Toast.makeText(HomePage.this,"Not added",Toast.LENGTH_LONG).show();
                         break;
 
+                    case R.id.my_profile:
+                        dl.closeDrawer(Gravity.START,false);
+                        startActivity(new Intent(HomePage.this,Show_Profile.class));
+
 
                 }
                 return false;

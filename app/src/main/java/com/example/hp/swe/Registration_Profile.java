@@ -107,14 +107,14 @@ public class Registration_Profile extends AppCompatActivity {
             Dialog.show();
             filepath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
         @Override
-        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
             mAuth.createUserWithEmailAndPassword(id + "@gmail.com", pass)
                     .addOnCompleteListener(Registration_Profile.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Profile p = new Profile(s_name,id,s_blood,s_dob,s_phone_number,s_emergency_number,s_email,"student","null");
+                                Profile p = new Profile(s_name,id,s_blood,s_dob,s_phone_number,s_emergency_number,s_email,"student",taskSnapshot.getDownloadUrl().toString());
                                 final DatabaseReference check = FirebaseDatabase.getInstance().getReference();
                                 check.child("Profile").child(id.substring(0,4)).child(id).setValue(p);
                                 Dialog.dismiss();
