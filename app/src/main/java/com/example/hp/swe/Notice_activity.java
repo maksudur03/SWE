@@ -49,7 +49,7 @@ public class Notice_activity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        noticeList.add(new Notice("Class Schedule ","nayeem","2016831025","null","Next class at 10:30 Bus 101","null"));
+//        noticeList.add(new Notice("Class Schedule ","nayeem","2016831025","null","Next class at 10:30 Bus 101","null"));
         recyclerView.setAdapter(mAdapter);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);

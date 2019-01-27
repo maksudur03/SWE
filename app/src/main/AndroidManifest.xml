@@ -37,13 +37,13 @@
         <activity android:name=".Login" />
         <activity
             android:name=".Group_messege"
-            android:parentActivityName=".HomePage" />
+             />
         <activity
             android:name=".Batch_16"
-            android:parentActivityName=".HomePage" />
+             />
         <activity
             android:name=".Batch_17"
-            android:parentActivityName=".HomePage" />
+             />
         <activity
             android:name=".Pop_up_class_adder"
             android:label="Select Schedule"
@@ -54,7 +54,7 @@
             android:label="Post Notice"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".Notice_activity"
-            android:parentActivityName=".HomePage"
+
             />
     </application>
 

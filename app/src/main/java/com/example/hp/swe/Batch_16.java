@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class Batch_16 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_16);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         class_schedulee = findViewById(R.id.batch_16_recycler);
@@ -97,4 +99,9 @@ public class Batch_16 extends AppCompatActivity {
 
 
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
+    }
+
 }

@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -185,6 +186,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                     case R.id.group_msg:
                         Intent intent = new Intent(HomePage.this,Group_messege.class);
                         intent.putExtra("ID",id_profile);
+                        dl.closeDrawer(Gravity.START, false);
                         startActivity(intent);
                         break;
 
@@ -192,6 +194,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         if(p.getRole().equals("CR")) {
                             Intent intent1 = new Intent(HomePage.this, C_R_Panel.class);
                             intent1.putExtra("ID", id_profile);
+                            dl.closeDrawer(Gravity.START, false);
                             startActivity(intent1);
                         }
                         else{
@@ -200,11 +203,22 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         break;
                     case R.id.notice:
                         Intent intent2 = new Intent(HomePage.this,Notice_activity.class);
+                        dl.closeDrawer(Gravity.START, false);
                         startActivity(intent2);
                         break;
 
                     case R.id.batch_2016:
+                        dl.closeDrawer(Gravity.START, false);
                         startActivity(new Intent(HomePage.this,Batch_16.class));
+                        break;
+                    case R.id.batch_2017:
+                        dl.closeDrawer(Gravity.START, false);
+                        startActivity(new Intent(HomePage.this,Batch_17.class));
+                        break;
+                    case R.id.batch_2018:
+                        dl.closeDrawer(Gravity.START, false);
+//                        startActivity(new Intent(HomePage.this,Batch_16.class));
+                        Toast.makeText(HomePage.this,"Not added",Toast.LENGTH_LONG).show();
                         break;
 
 

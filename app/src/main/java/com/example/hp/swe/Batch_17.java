@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ public class Batch_17 extends AppCompatActivity {
 
     RecyclerView class_schedulee;
     private batch_16_adapter mAdapter;
-    public  static List<Profile> profile_17 = new ArrayList<>();
+    public  List<Profile> profile_17 = new ArrayList<>();
     SharedPreferences sp;
     String batch;
 
@@ -33,7 +34,7 @@ public class Batch_17 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_17);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         class_schedulee = findViewById(R.id.batch_17_recycler);
         mAdapter = new batch_16_adapter(profile_17,Batch_17.this);
@@ -80,11 +81,10 @@ public class Batch_17 extends AppCompatActivity {
 
 
 
-
-
-
-
-
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 }
 
