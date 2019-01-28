@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:id="@+id/notice_recycler"
 
+
         >
 
 

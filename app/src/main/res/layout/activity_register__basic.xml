@@ -33,7 +33,7 @@
                 android:inputType="textCapWords"
                 android:padding="15dp"
                 android:background="@drawable/shapeemail"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_person_black_24d0p"
                 android:drawablePadding="10dp"
                 android:hint="Registration Number"
                 android:textColor="@color/white"

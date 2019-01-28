@@ -21,6 +21,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -43,6 +47,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragmentInteractionListener,ExamSchedule.OnFragmentInteractionListener {
 
@@ -55,10 +61,13 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     private FirebaseAuth mAuth;
     public static String id_profile;
     TextView nav_user;
+    ImageView nav_user_img;
     public static String user_name = "hh";
-    String id,batch;
+    String id,batch,myjson;
     SharedPreferences sp;
+    LinearLayout ln;
     Profile p;
+    Intent myactivity;
     DatabaseReference ref;
 
     @Override
@@ -89,7 +98,9 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         nv = (NavigationView) findViewById(R.id.nav_view);
         View hView =  nv.getHeaderView(0);
          nav_user = (TextView)hView.findViewById(R.id.nav_header_textView);
+         nav_user_img = hView.findViewById(R.id.nav_header_imageView);
 
+        ln = hView.findViewById(R.id.nav_header);
         Intent i = getIntent();
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
@@ -115,7 +126,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                  p = dataSnapshot.getValue(Profile.class);
                 if(p.getRegistration_number().equals(id_profile)){
-                    SetName(p.getName(),p.getImage());
+                    SetName(p.getName(),p.getImage(),p);
                     Dialog.dismiss();
                 }
             }
@@ -223,8 +234,9 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
                     case R.id.my_profile:
                         dl.closeDrawer(Gravity.START,false);
-                        startActivity(new Intent(HomePage.this,Show_Profile.class));
 
+                        startActivity(myactivity);
+                        break;
 
                 }
                 return false;
@@ -308,12 +320,21 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
             back_pressed = System.currentTimeMillis();
         }
     }
-    void SetName(String s,String img){
+    void SetName(String s,String img,Profile p){
 
-        nav_user.setText(s);
+//        nav_user.setText(s);
         user_name = s;
+        Picasso.get().load(img).into(nav_user_img);
+
         sp.edit().putString("profile_pic",img).apply();
         sp.edit().putString("user_name",user_name);
+
+
+         myactivity = new Intent(HomePage.this, Show_Profile.class);
+        Gson gson = new Gson();
+        myactivity.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        myjson = gson.toJson(p);
+        myactivity.putExtra("myjson", myjson);
 
     }
 }

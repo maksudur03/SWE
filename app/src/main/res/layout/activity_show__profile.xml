@@ -21,17 +21,6 @@
             android:paddingBottom="20dp"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_settings_24dp"
-                />
-
             <RelativeLayout
                 android:id="@+id/imgUser"
                 android:layout_width="wrap_content"
@@ -46,7 +35,8 @@
                     android:id="@+id/profile_image"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/ic_user"
+                    android:background="@drawable/ic_person_black_24d0p"
+                    android:src="@drawable/ic_person_black_24d0p"
                     app:civ_border_width="2dp"
                     app:civ_border_color="#FF000000"/>
 

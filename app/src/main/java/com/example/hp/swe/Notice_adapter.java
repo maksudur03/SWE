@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -60,11 +62,10 @@ public class Notice_adapter extends RecyclerView.Adapter<Notice_adapter.MyViewHo
 
         }
         else{
-
+            myViewHolder.image.setVisibility(View.VISIBLE);
         }
 
-      //  myViewHolder.profilepic.
-
+        Picasso.get().load(p.getProfilepic()).into(myViewHolder.profilepic);
 
     }
 
@@ -72,10 +73,5 @@ public class Notice_adapter extends RecyclerView.Adapter<Notice_adapter.MyViewHo
     public int getItemCount() {
         return notice_list.size();
     }
-
-
-
-
-
 
 }
