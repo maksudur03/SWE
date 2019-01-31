@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -23,20 +23,27 @@
             android:name=".HomePage"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@style/AppTheme.Light" />
-        <activity android:name=".Register_Basic" />
-        <activity android:name=".Registration_Profile" />
+        <activity
+            android:name=".Register_Basic"
+            android:theme="@style/AppTheme.Light" />
+        <activity
+            android:name=".Registration_Profile"
+            android:theme="@style/AppTheme.Light" />
         <activity android:name=".CR_class_schedule" />
         <activity android:name=".C_R_Panel" />
         <activity
             android:name=".SplasScreen"
             android:theme="@style/AppTheme.Light">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppTheme.Light" />
         <activity android:name=".Group_messege" />
         <activity android:name=".Batch_16" />
         <activity android:name=".Batch_17" />
@@ -50,10 +57,11 @@
             android:label="Post Notice"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".Notice_activity" />
-        <activity android:name=".allclass">
-
-        </activity>
-        <activity android:name=".Show_day_list">
+        <activity android:name=".allclass"></activity>
+        <activity android:name=".Show_day_list"></activity>
+        <activity android:name=".Pop_up_exam_adder"
+            android:theme="@style/Theme.AppCompat.Dialog"
+            >
 
         </activity>
     </application>

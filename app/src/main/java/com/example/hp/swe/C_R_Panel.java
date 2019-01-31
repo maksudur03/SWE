@@ -22,6 +22,13 @@ public class C_R_Panel extends Activity {
             }
         });
 
+        exam_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(C_R_Panel.this,Pop_up_exam_adder.class));
+
+            }
+        });
     }
 
 }

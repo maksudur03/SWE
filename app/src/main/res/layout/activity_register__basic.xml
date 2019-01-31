@@ -15,64 +15,51 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@mipmap/login"
+        <ImageView android:src="@mipmap/icon2"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
 
         <!--  Name Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+
             <EditText android:id="@+id/input_registration_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
+                android:inputType="number"
                 android:padding="15dp"
-                android:background="@drawable/shapeemail"
-                android:drawableLeft="@drawable/ic_person_black_24d0p"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shapeemail1"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:drawablePadding="10dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Registration Number"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textColorHighlight="@color/white"
                  />
-        </android.support.design.widget.TextInputLayout>
-
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:background="@drawable/shapeemail"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/shapeemail1"
                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                 android:drawablePadding="10dp"
                 android:padding="15dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Password"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textColorHighlight="@color/white" />
-        </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:background="@drawable/shapeemail"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/shapeemail1"
                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                 android:drawablePadding="10dp"
                 android:hint="Confirm Password"
@@ -80,7 +67,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textColorHighlight="@color/white"/>
-        </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton

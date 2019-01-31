@@ -136,7 +136,7 @@ public class ExamSchedule extends Fragment {
                 }
 
                 if(c.compareTo(date)<=0){
-                    examList.add(new Exam_Schedule_object(p.getDate(),"10:30pm","Bus 350"));
+                    examList.add(new Exam_Schedule_object(p.getDate(),p.getTime(),p.getSubject()));
                 }
 //                examList.add(dataSnapshot.getValue(Exam_Schedule_object.class));
                 mAdapter.notifyDataSetChanged();
