@@ -113,11 +113,6 @@ public class ClassSchedule extends Fragment {
 
 
         recyclerView = v.findViewById(R.id.class_schedule);
-        mAdapter = new class_schedule_adapter(classList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         recyclerView.setAdapter(mAdapter);
 
         Calendar c = Calendar.getInstance();
@@ -126,7 +121,17 @@ public class ClassSchedule extends Fragment {
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         String weekdays[] = new DateFormatSymbols(Locale.ENGLISH).getWeekdays();
         DAY = weekdays[dayOfWeek];
+
+        mAdapter = new class_schedule_adapter(classList,DAY);
+        recyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         classList.add(new Class_Schedule_object("10asf","sajkfjsa"));
+
+
+//        classList.add(new Class_Schedule_object("10asf","sajkfjsa"));
 
         final ProgressDialog Dialog = new ProgressDialog(getActivity());
         Dialog.setMessage("Please Wait.....");

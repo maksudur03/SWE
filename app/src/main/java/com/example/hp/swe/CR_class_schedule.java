@@ -44,7 +44,7 @@ public class CR_class_schedule extends AppCompatActivity implements  AdapterView
         setContentView(R.layout.activity_cr_class_schedule);
 
 
-         spin = (Spinner) findViewById(R.id.spinner);
+        spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
         sp = getSharedPreferences("login",MODE_PRIVATE);
 

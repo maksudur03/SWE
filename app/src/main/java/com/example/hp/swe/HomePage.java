@@ -202,14 +202,14 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         break;
 
                     case R.id.cr_panel:
-                        if(p.getRole().equals("CR")) {
+                        if(p.getRole().trim().equals("CR")) {
                             Intent intent1 = new Intent(HomePage.this, C_R_Panel.class);
                             intent1.putExtra("ID", id_profile);
                             dl.closeDrawer(Gravity.START, false);
                             startActivity(intent1);
                         }
                         else{
-                            Toast.makeText(HomePage.this,"Not Authorized. Contact admin plz",Toast.LENGTH_LONG).show();
+                            Toast.makeText(HomePage.this,p.getRole(),Toast.LENGTH_LONG).show();
                         }
                         break;
                     case R.id.notice:
@@ -236,6 +236,10 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         dl.closeDrawer(Gravity.START,false);
 
                         startActivity(myactivity);
+                        break;
+                    case R.id.class_routine:
+                        dl.closeDrawer(Gravity.START,false);
+                        startActivity(new Intent(HomePage.this,Show_day_list.class));
                         break;
 
                 }
@@ -322,7 +326,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
     }
     void SetName(String s,String img,Profile p){
 
-//        nav_user.setText(s);
+        nav_user.setText(s);
         user_name = s;
         Picasso.get().load(img).into(nav_user_img);
 

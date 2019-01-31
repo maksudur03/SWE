@@ -3,7 +3,7 @@
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@mipmap/back"
+    android:background="@mipmap/backgd"
     android:clickable="true"
     android:focusable="true"
     android:gravity="bottom"
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/nav_header_textView"
         android:layout_width="match_parent"
-        android:text="Koushik Sarkar"
+        android:text=""
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"

@@ -3,6 +3,8 @@
     package="com.example.hp.swe">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +21,8 @@
 
         <activity
             android:name=".HomePage"
-            android:theme="@style/AppTheme.Light"
             android:configChanges="keyboardHidden|orientation"
-            />
+            android:theme="@style/AppTheme.Light" />
         <activity android:name=".Register_Basic" />
         <activity android:name=".Registration_Profile" />
         <activity android:name=".CR_class_schedule" />
@@ -36,15 +37,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
-        <activity
-            android:name=".Group_messege"
-             />
-        <activity
-            android:name=".Batch_16"
-             />
-        <activity
-            android:name=".Batch_17"
-             />
+        <activity android:name=".Group_messege" />
+        <activity android:name=".Batch_16" />
+        <activity android:name=".Batch_17" />
         <activity
             android:name=".Pop_up_class_adder"
             android:label="Select Schedule"
@@ -54,10 +49,13 @@
             android:name=".Notice_pop_up"
             android:label="Post Notice"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name=".Notice_activity"
+        <activity android:name=".Notice_activity" />
+        <activity android:name=".allclass">
 
-            />
+        </activity>
+        <activity android:name=".Show_day_list">
+
+        </activity>
     </application>
-<uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 </manifest>

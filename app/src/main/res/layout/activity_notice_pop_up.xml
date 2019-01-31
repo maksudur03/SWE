@@ -63,6 +63,7 @@
         android:layout_marginTop="6dp"
     android:layout_marginLeft="7dp"
     android:textSize="18dp"
+
         android:textStyle="bold"
         android:layout_marginBottom="15dp"
     />
@@ -72,6 +73,7 @@
         android:src="@mipmap/ic_launcher"
         android:layout_marginLeft="20dp"
         android:visibility="gone"
+        android:id="@+id/smallimg"
         android:scaleType="fitXY"
         android:layout_marginTop="10dp"
         />

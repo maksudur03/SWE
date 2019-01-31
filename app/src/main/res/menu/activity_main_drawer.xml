@@ -31,11 +31,7 @@
             />
 
     </group>
-    <group android:id="@+id/grou">
-        <item android:id="@+id/shared_content"
-            android:title="Shared Content" />
 
-    </group>
     <group android:id="@+id/group_men">
         <item android:id="@+id/notice"
             android:title="Notice" />

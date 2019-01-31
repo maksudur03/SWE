@@ -63,6 +63,7 @@ public class Notice_adapter extends RecyclerView.Adapter<Notice_adapter.MyViewHo
         }
         else{
             myViewHolder.image.setVisibility(View.VISIBLE);
+            Picasso.get().load(p.getPicture()).into(myViewHolder.image);
         }
 
         Picasso.get().load(p.getProfilepic()).into(myViewHolder.profilepic);

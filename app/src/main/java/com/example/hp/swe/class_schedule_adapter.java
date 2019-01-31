@@ -46,31 +46,27 @@ public class class_schedule_adapter extends RecyclerView.Adapter<class_schedule_
 
     @Override
     public void onBindViewHolder(@NonNull class_schedule_adapter.MyViewHolder myViewHolder, int i) {
-        if(s != null){
-            Class_Schedule_object class_schedule_object = class_list.get(i);
-            myViewHolder.time.setText(class_schedule_object.getTime());
-            myViewHolder.subject.setText(class_schedule_object.getSubject());
-            myViewHolder.title.setVisibility(View.GONE);
-            myViewHolder.subject.setVisibility(View.VISIBLE);
-            myViewHolder.time.setVisibility(View.VISIBLE);
-        }
-        else {
+
             if (i == 0) {
-                myViewHolder.title.setText(ClassSchedule.DAY);
+                myViewHolder.title.setText(s);
                 myViewHolder.title.setVisibility(View.VISIBLE);
                 myViewHolder.subject.setVisibility(View.GONE);
                 myViewHolder.time.setVisibility(View.GONE);
-            } else {
-                Class_Schedule_object class_schedule_object = class_list.get(i);
-                myViewHolder.time.setText(class_schedule_object.getTime());
-                myViewHolder.subject.setText(class_schedule_object.getSubject());
-                myViewHolder.title.setVisibility(View.GONE);
-                myViewHolder.subject.setVisibility(View.VISIBLE);
-                myViewHolder.time.setVisibility(View.VISIBLE);
-
             }
+
+            else  {
+                    Class_Schedule_object class_schedule_object = class_list.get(i);
+                    myViewHolder.time.setText(class_schedule_object.getTime());
+                    myViewHolder.subject.setText(class_schedule_object.getSubject());
+                    myViewHolder.title.setVisibility(View.GONE);
+                    myViewHolder.subject.setVisibility(View.VISIBLE);
+                    myViewHolder.time.setVisibility(View.VISIBLE);
+                }
+
+
         }
-    }
+
+
 
     @Override
     public int getItemCount() {
