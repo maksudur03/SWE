@@ -40,6 +40,7 @@ public class allclass extends AppCompatActivity {
         batch = id.substring(0,4);
 
         mAdapter = new class_schedule_adapter(classList,s);
+        ClassSchedule.DAY = s;
         classList.add(new Class_Schedule_object("hhh","hjhjh"));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(allclass.this);
         rec.setLayoutManager(mLayoutManager);

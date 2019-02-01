@@ -121,14 +121,14 @@ public class ClassSchedule extends Fragment {
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         String weekdays[] = new DateFormatSymbols(Locale.ENGLISH).getWeekdays();
         DAY = weekdays[dayOfWeek];
-
+        classList.add(new Class_Schedule_object("10asf","sajkfjsa"));
         mAdapter = new class_schedule_adapter(classList,DAY);
         recyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        classList.add(new Class_Schedule_object("10asf","sajkfjsa"));
+
 
 
 //        classList.add(new Class_Schedule_object("10asf","sajkfjsa"));

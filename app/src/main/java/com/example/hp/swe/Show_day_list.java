@@ -22,8 +22,7 @@ public class Show_day_list extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new day_adapter(msgList,Show_day_list.this
-        );
+        mAdapter = new day_adapter(msgList,Show_day_list.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         msgList.add("Sunday");
