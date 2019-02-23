@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +52,7 @@ public class ExamSchedule extends Fragment {
     String id,batch;
     Date date = null,c;
     SimpleDateFormat df;
+    TextView emptyView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -97,6 +99,7 @@ public class ExamSchedule extends Fragment {
 
 
 
+        emptyView = v.findViewById(R.id.empty_view);
         recyclerView = v.findViewById(R.id.exam_schedule);
         mAdapter = new Exam_Schedule_adapter(examList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -105,6 +108,7 @@ public class ExamSchedule extends Fragment {
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
+
 
 
         final ProgressDialog Dialog = new ProgressDialog(getActivity());
@@ -137,6 +141,8 @@ public class ExamSchedule extends Fragment {
 
                 if(c.compareTo(date)<=0){
                     examList.add(new Exam_Schedule_object(p.getDate(),p.getTime(),p.getSubject()));
+                    recyclerView.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
                 }
 //                examList.add(dataSnapshot.getValue(Exam_Schedule_object.class));
                 mAdapter.notifyDataSetChanged();
@@ -164,6 +170,14 @@ public class ExamSchedule extends Fragment {
 
             }
         });
+        if (examList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
 
 
 

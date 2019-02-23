@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 public class Show_Profile extends AppCompatActivity {
     ImageView call;
     ImageView profile_image;
+    Profile p;
     TextView name,reg_no,email,phone,emergecny,blood,dob;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,16 @@ public class Show_Profile extends AppCompatActivity {
         dob = findViewById(R.id.dob);
 
 
+
+//        Intent i = getIntent();
+//        String s = i.getStringExtra("Position");
+//        int pos = Integer.parseInt(s);
+        Gson gson = new Gson();
+        p = gson.fromJson(getIntent().getStringExtra("myjson"), Profile.class);
+
+
+//        Profile p = Batch_16.profile_16.get(pos);
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +56,7 @@ public class Show_Profile extends AppCompatActivity {
 
 
                 if (ActivityCompat.checkSelfPermission(Show_Profile.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(Show_Profile.this,"gd",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Show_Profile.this, p.getRole(),Toast.LENGTH_LONG).show();
                 }
                 else{Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setData(Uri.parse("tel:123456789"));
@@ -55,14 +66,8 @@ public class Show_Profile extends AppCompatActivity {
 
         });
 
-//        Intent i = getIntent();
-//        String s = i.getStringExtra("Position");
-//        int pos = Integer.parseInt(s);
-        Gson gson = new Gson();
-        Profile p = gson.fromJson(getIntent().getStringExtra("myjson"), Profile.class);
 
 
-//        Profile p = Batch_16.profile_16.get(pos);
         name.setText(p.getName());
         reg_no.setText(p.getRegistration_number());
         email.setText(p.getEmail());

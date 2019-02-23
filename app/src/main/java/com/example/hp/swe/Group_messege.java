@@ -106,7 +106,8 @@ public class Group_messege extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-        recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+//        recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+//        mLayoutManager.scrollToPosition(mAdapter.getItemCount()-1);
 
 
 
@@ -146,6 +147,7 @@ public class Group_messege extends AppCompatActivity {
 
             }
         });
+
 
 
 

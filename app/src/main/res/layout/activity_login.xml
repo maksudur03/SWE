@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="70dp"
             android:layout_marginBottom="60dp"
-            android:src="@mipmap/icon2"/>
+            android:src="@mipmap/smicon"/>
 
         <EditText
             android:layout_width="match_parent"

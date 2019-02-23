@@ -62,7 +62,7 @@ public class Notice_pop_up extends AppCompatActivity {
                 ref = FirebaseDatabase.getInstance().getReference();
                 ref.keepSynced(true);
 
-                if(Uri.EMPTY.equals(selectedImage)){
+                if(selectedImage == null){
                     ref.child("Notice").child(batch).push().setValue(new Notice(notice_title,HomePage.user_name,id,"null",notice_text,profile_pic));
                     Notice_pop_up.this.finish();
 

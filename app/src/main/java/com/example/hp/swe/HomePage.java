@@ -60,15 +60,16 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
     private FirebaseAuth mAuth;
     public static String id_profile;
-    TextView nav_user;
+    TextView nav_user,nav_reg;
     ImageView nav_user_img;
     public static String user_name = "hh";
     String id,batch,myjson;
     SharedPreferences sp;
     LinearLayout ln;
-    Profile p;
+    private Profile p;
     Intent myactivity;
     DatabaseReference ref;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,7 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
         View hView =  nv.getHeaderView(0);
          nav_user = (TextView)hView.findViewById(R.id.nav_header_textView);
          nav_user_img = hView.findViewById(R.id.nav_header_imageView);
+        nav_reg = hView.findViewById(R.id.nav_reg);
 
         ln = hView.findViewById(R.id.nav_header);
         Intent i = getIntent();
@@ -202,14 +204,14 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
                         break;
 
                     case R.id.cr_panel:
-                        if(p.getRole().trim().equals("CR")) {
+                        if(role.trim().equals("CR")) {
                             Intent intent1 = new Intent(HomePage.this, C_R_Panel.class);
                             intent1.putExtra("ID", id_profile);
                             dl.closeDrawer(Gravity.START, false);
                             startActivity(intent1);
                         }
                         else{
-                            Toast.makeText(HomePage.this,p.getRole(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(HomePage.this,role,Toast.LENGTH_LONG).show();
                         }
                         break;
                     case R.id.notice:
@@ -328,12 +330,13 @@ public class HomePage extends AppCompatActivity implements ClassSchedule.OnFragm
 
         nav_user.setText(s);
         user_name = s;
+        nav_reg.setText(id_profile);
         Picasso.get().load(img).into(nav_user_img);
 
         sp.edit().putString("profile_pic",img).apply();
         sp.edit().putString("user_name",user_name);
 
-
+        role = p.getRole();
          myactivity = new Intent(HomePage.this, Show_Profile.class);
         Gson gson = new Gson();
         myactivity.addFlags(FLAG_ACTIVITY_NEW_TASK);

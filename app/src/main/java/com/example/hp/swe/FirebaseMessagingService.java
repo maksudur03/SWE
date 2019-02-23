@@ -31,11 +31,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             //--CLICK ACTION IS PROVIDED---
-//            Intent resultIntent = new Intent(click_action);
+            Intent resultIntent = new Intent(this,Notice_activity.class);
 //            resultIntent.putExtra("user_id",from_user_id);
 
-//            PendingIntent resultPendingIntent = PendingIntent.getActivity(this,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-//            mBuilder.setContentIntent(resultPendingIntent);
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(this,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(resultPendingIntent);
 
 
             int mNotificationId=(int)System.currentTimeMillis();
